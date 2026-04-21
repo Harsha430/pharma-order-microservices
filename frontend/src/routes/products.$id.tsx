@@ -48,7 +48,7 @@ function ProductDetail() {
               <FileText className="h-3.5 w-3.5" /> Prescription required
             </span>
           )}
-          <p className="mt-4 text-muted-foreground">{p.description ?? "Trusted, lab-tested formulation from VerdeRx."}</p>
+          <p className="mt-4 text-muted-foreground">{p.description ?? "Trusted, lab-tested formulation from PharmaOrder."}</p>
           <p className="mt-6 text-4xl font-bold">${p.price?.toFixed(2)}</p>
 
           <div className="mt-6 flex gap-3">

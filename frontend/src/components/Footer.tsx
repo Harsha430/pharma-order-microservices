@@ -9,10 +9,11 @@ export function Footer() {
             <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[image:var(--gradient-primary)] text-primary-foreground">
               <Pill className="h-5 w-5" />
             </span>
-            <span className="text-lg font-semibold">VerdeRx</span>
+            <span className="text-lg font-semibold">PharmaOrder</span>
           </div>
-          <p className="mt-3 text-sm text-muted-foreground">
-            Wellness, delivered with care. Licensed pharmacy you can trust.
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
+            PharmaOrder is your trusted source for authentic medications,
+            personalized wellness advice, and fast home delivery.
           </p>
         </div>
         <div>
@@ -35,7 +36,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-border/60 py-4 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} VerdeRx Pharmacy. All rights reserved.
+        © {new Date().getFullYear()} PharmaOrder Pharmacy. All rights reserved.
       </div>
     </footer>
   );

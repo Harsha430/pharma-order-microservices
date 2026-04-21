@@ -39,9 +39,9 @@ public class OrderNotificationListener {
             org.springframework.mail.javamail.MimeMessageHelper helper = 
                 new org.springframework.mail.javamail.MimeMessageHelper(mimeMessage, "utf-8");
             
-            helper.setFrom("VerdeRx <no-reply@verdery.com>");
+            helper.setFrom("PharmaOrder <no-reply@pharmaorder.com>");
             helper.setTo(email);
-            helper.setSubject("Order Confirmed — VerdeRx #" + orderId);
+            helper.setSubject("Order Confirmed — PharmaOrder #" + orderId);
             helper.setText(htmlContent, true);
 
             mailSender.send(mimeMessage);

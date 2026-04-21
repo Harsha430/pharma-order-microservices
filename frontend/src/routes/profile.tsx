@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/profile")({
-  head: () => ({ meta: [{ title: "My Profile — VerdeRx" }] }),
+  head: () => ({ meta: [{ title: "My Profile — PharmaOrder" }] }),
   component: ProfilePage,
 });
 
@@ -161,7 +161,7 @@ function ProfilePage() {
             <p className="text-base font-medium opacity-80 uppercase tracking-widest">Health Points</p>
             <p className="mt-2 text-7xl font-bold tracking-tighter">{points}</p>
             <p className="mt-8 text-sm leading-relaxed opacity-90 font-medium">
-              You're doing great! Keep ordering from VerdeRx to earn points and claim exclusive discounts.
+              You're doing great! Keep ordering from PharmaOrder to earn points and claim exclusive discounts.
             </p>
             <Link to="/catalog">
               <Button variant="secondary" className="mt-10 w-full h-14 rounded-2xl text-base font-bold shadow-soft">

@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { Search, FilterX } from "lucide-react";
-import { api, type Product } from "@/lib/api";
+import { api, type Product, type Category } from "@/lib/api";
 import { mockProducts, mockCategories } from "@/lib/mockData";
 import { ProductCard } from "@/components/ProductCard";
 import { Input } from "@/components/ui/input";
@@ -16,8 +16,8 @@ export const Route = createFileRoute("/catalog")({
   }),
   head: () => ({
     meta: [
-      { title: "Catalog — VerdeRx" },
-      { name: "description", content: "Browse vitamins, prescriptions, skincare and more from VerdeRx pharmacy." },
+      { title: "Catalog — PharmaOrder" },
+      { name: "description", content: "Browse vitamins, prescriptions, skincare and more from PharmaOrder pharmacy." },
     ],
   }),
   component: CatalogPage,

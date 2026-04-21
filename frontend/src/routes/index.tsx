@@ -9,9 +9,9 @@ import heroImg from "@/assets/hero.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "VerdeRx — Wellness, delivered with care" },
-      { name: "description", content: "Premium online pharmacy. Vitamins, prescriptions and skincare from licensed pharmacists, delivered fast." },
-      { property: "og:title", content: "VerdeRx — Wellness, delivered with care" },
+      { title: "PharmaOrder — Wellness, delivered with care" },
+      { name: "description", content: "Order medicines, vitamins and skincare from a trusted modern pharmacy. Fast delivery, licensed pharmacists, health rewards." },
+      { property: "og:title", content: "PharmaOrder — Wellness, delivered with care" },
       { property: "og:description", content: "Premium online pharmacy. Delivered fast, with care." },
     ],
   }),
@@ -47,7 +47,7 @@ function HomePage() {
               Wellness, <span className="bg-[image:var(--gradient-primary)] bg-clip-text text-transparent">delivered with care.</span>
             </h1>
             <p className="mt-5 max-w-lg text-base text-muted-foreground md:text-lg">
-              From daily vitamins to specialty prescriptions — VerdeRx makes feeling
+              From daily vitamins to specialty prescriptions — PharmaOrder makes feeling
               your best feel effortless.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">

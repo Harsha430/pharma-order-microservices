@@ -8,17 +8,19 @@ import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-background px-4">
+        <div className="flex items-center gap-2 mb-8">
+            <span className="text-xl font-bold">Pharma<span className="text-primary">Order</span></span>
+        </div>
         <h1 className="text-7xl font-bold text-foreground">404</h1>
         <h2 className="mt-4 text-xl font-semibold">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist.
+        <p className="mt-2 text-sm text-muted-foreground text-center max-w-sm">
+          The page you're looking for doesn't exist in our pharmacy. 
+          Return to the home page to continue your journey.
         </p>
         <a href="/" className="mt-6 inline-flex rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground hover:opacity-90">
           Go home
         </a>
-      </div>
     </div>
   );
 }
@@ -30,7 +32,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "VerdeRx — Modern Wellness Pharmacy" },
+      { title: "PharmaOrder — Modern Wellness Pharmacy" },
       { name: "description", content: "Order medicines, vitamins and skincare from a trusted modern pharmacy. Fast delivery, licensed pharmacists, health rewards." },
     ],
     links: [{ rel: "stylesheet", href: appCss }],

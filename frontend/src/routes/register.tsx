@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/register")({
-  head: () => ({ meta: [{ title: "Create account — VerdeRx" }] }),
+  head: () => ({ meta: [{ title: "Create account — PharmaOrder" }] }),
   component: RegisterPage,
 });
 
@@ -26,7 +26,7 @@ function RegisterPage() {
     try {
       const res = await api.post<AuthResponse>("/auth/register", form);
       setAuth(res.data.id, res.data.token, res.data.email, res.data.roles ?? []);
-      toast.success("Welcome to VerdeRx! +150 health points 🎉");
+      toast.success("Welcome to PharmaOrder! +150 health points 🎉");
       nav({ to: "/" });
     } catch (err) {
       toast.error((err as Error).message);

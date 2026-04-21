@@ -60,8 +60,9 @@ export const mockInventory: Record<string, Inventory> = {
 
 export const mockProfile: Profile = {
   id: "u_001",
-  name: "Alex Morgan",
-  email: "alex@verderx.demo",
+  firstName: "Alex",
+  lastName: "Morgan",
+  email: "alex@pharmaorder.demo",
   phone: "+1 (555) 010-2024",
   roles: ["USER"],
   healthPoints: 285,

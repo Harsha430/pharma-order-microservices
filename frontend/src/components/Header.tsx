@@ -43,7 +43,7 @@ export function Header() {
             <Pill className="h-5 w-5" />
           </span>
           <span className="text-lg font-semibold tracking-tight">
-            Verde<span className="text-primary">Rx</span>
+            Pharma<span className="text-primary">Order</span>
           </span>
         </Link>
 
