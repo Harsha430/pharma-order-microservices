@@ -1,5 +1,4 @@
 <div align="center">
-  <img src="https://images.unsplash.com/photo-1587854685352-25a8111e6e56?q=80&w=200&auto=format&fit=crop" width="100" height="100" alt="PharmaOrder Logo" style="border-radius: 20px;"/>
   <h1>💊 PharmaOrder Platform</h1>
   <p><strong>A Next-Generation, Microservices-Driven E-Pharmacy Ecosystem</strong></p>
 
