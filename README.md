@@ -519,25 +519,4 @@ We welcome contributions! Please follow these steps:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-
-## 📞 Support
-
-For support and questions:
-- 📧 Email: support@pharmaorder.com
-- 💬 Slack: [Workspace Link]
-- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/pharmaorder/issues)
-
-## 🗺️ Roadmap
-
-- [ ] Mobile app (React Native)
-- [ ] Payment gateway integration (Razorpay/Stripe)
-- [ ] Real-time order tracking
-- [ ] AI-powered medicine recommendations
-- [ ] Telemedicine integration
-- [ ] Multi-language support
-- [ ] Advanced analytics dashboard
-- [ ] Subscription-based medicine delivery
-
----
-
-**Built with ❤️ by the PharmaOrder Team**
+**Built with ❤️ by Karthikeya**
