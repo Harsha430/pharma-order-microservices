@@ -32,8 +32,12 @@ export type Product = {
   id: string | number;
   name: string;
   price: number;
+  originalPrice?: number;
   description?: string;
   prescriptionRequired?: boolean;
+  dosage?: string;
+  packaging?: string;
+  quantity?: number;
   status?: string;
   category?: { name: string };
 };
@@ -52,8 +56,11 @@ export type OrderItem = { productId: string | number; quantity: number; name?: s
 export type Order = {
   id: string | number;
   totalAmount: number;
+  pointsRedeemed?: number;
+  discountAmount?: number;
   status: string;
   createdAt?: string;
   orderItems?: OrderItem[];
 };
 export type Inventory = { productId: string | number; quantity: number; status: string };
+export type Loyalty = { userId: string; totalPoints: number };

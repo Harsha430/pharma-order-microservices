@@ -35,6 +35,8 @@ public class AuthService {
         this.jwtUtil = jwtUtil;
     }
 
+    private final org.springframework.web.client.RestTemplate restTemplate = new org.springframework.web.client.RestTemplate();
+
     public AuthResponse register(RegisterRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("Email already exists");
@@ -53,7 +55,16 @@ public class AuthService {
                 .roles(Collections.singleton(userRole))
                 .build();
 
-        userRepository.save(user);
+        User saved = userRepository.save(user);
+
+        // Award 150 signup health points via loyalty-service
+        try {
+            String loyaltyUrl = "http://loyalty-service:8088/api/v1/loyalty/initialize/" + saved.getId();
+            restTemplate.postForObject(loyaltyUrl, null, Object.class);
+            System.out.println("Awarded 150 signup health points to user " + saved.getId());
+        } catch (Exception e) {
+            System.err.println("Could not award signup health points: " + e.getMessage());
+        }
 
         return authenticate(AuthRequest.builder()
                 .email(request.getEmail())
@@ -78,6 +89,7 @@ public class AuthService {
         return AuthResponse.builder()
                 .token(token)
                 .email(user.getEmail())
+                .id(user.getId())
                 .roles(roles)
                 .build();
     }

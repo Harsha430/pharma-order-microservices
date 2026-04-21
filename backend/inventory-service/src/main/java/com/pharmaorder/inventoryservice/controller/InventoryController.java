@@ -27,4 +27,9 @@ public class InventoryController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @org.springframework.web.bind.annotation.PostMapping("/bulk")
+    public ResponseEntity<java.util.List<Inventory>> getBulkStock(@org.springframework.web.bind.annotation.RequestBody java.util.List<Long> productIds) {
+        return ResponseEntity.ok(inventoryRepository.findAllByProductIdIn(productIds));
+    }
 }

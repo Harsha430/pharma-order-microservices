@@ -28,6 +28,12 @@ function ProfilePage() {
     retry: false,
   });
 
+  const { data: loyalty } = useQuery({
+    queryKey: ["loyalty", user?.id],
+    queryFn: async () => (await api.get<{totalPoints: number}>(`/loyalty/user/${user!.id}`)).data,
+    enabled: !!user?.id,
+  });
+
   useEffect(() => {
     if (data) {
       setEditForm({
@@ -61,7 +67,7 @@ function ProfilePage() {
   }
 
   const fullName = data?.firstName ? `${data.firstName} ${data.lastName || ""}`.trim() : user.email.split("@")[0];
-  const points = data?.healthPoints ?? 150;
+  const points = loyalty?.totalPoints ?? 0;
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
@@ -160,6 +166,7 @@ function ProfilePage() {
             <Heart className="h-10 w-10 mb-6" />
             <p className="text-base font-medium opacity-80 uppercase tracking-widest">Health Points</p>
             <p className="mt-2 text-7xl font-bold tracking-tighter">{points}</p>
+            <p className="mt-2 text-sm font-medium opacity-80 uppercase tracking-widest">Value: ₹{(points / 10).toFixed(2)}</p>
             <p className="mt-8 text-sm leading-relaxed opacity-90 font-medium">
               You're doing great! Keep ordering from PharmaOrder to earn points and claim exclusive discounts.
             </p>

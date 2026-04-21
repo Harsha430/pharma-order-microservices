@@ -3,7 +3,7 @@ server:
 
 aws:
   s3:
-    endpoint: http://localhost:9000
+    endpoint: http://minio:9000
     access-key: minioadmin
     secret-key: minioadmin
     bucket: pharmaorder-files
@@ -12,7 +12,7 @@ aws:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eureka-server:8761/eureka/
 
 spring:
   servlet:

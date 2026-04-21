@@ -1,9 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Package, Clock } from "lucide-react";
+import { Package, Clock, ShoppingCart } from "lucide-react";
 import { api, type Order } from "@/lib/api";
 import { useAuth } from "@/stores/auth";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { useCart } from "@/stores/cart";
+import type { Product } from "@/lib/api";
 
 export const Route = createFileRoute("/orders")({
   component: OrdersPage,
@@ -11,6 +14,7 @@ export const Route = createFileRoute("/orders")({
 
 function OrdersPage() {
   const { user } = useAuth();
+  const add = useCart((s) => s.add);
 
   const { data: orders = [], isLoading } = useQuery({
     queryKey: ["orders", user?.id],
@@ -62,7 +66,50 @@ function OrdersPage() {
               </div>
             </div>
             <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">{o.status}</span>
-            <p className="text-lg font-bold">${o.totalAmount?.toFixed(2)}</p>
+            <p className="text-lg font-bold">₹{o.totalAmount?.toFixed(2)}</p>
+            {o.orderItems && o.orderItems.length > 0 && (
+              <div className="mt-4 w-full border-t border-border/40 pt-4">
+                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Order Items</p>
+                <div className="mt-2 space-y-2">
+                  {o.orderItems.map((item: any, idx: number) => (
+                    <div key={idx} className="flex justify-between text-sm">
+                      <span>Product #{item.productId} x {item.quantity}</span>
+                      <span className="font-medium">₹{(item.price * item.quantity).toFixed(2)}</span>
+                    </div>
+                  ))}
+                  {(o.discountAmount ?? 0) > 0 && (
+                    <div className="flex justify-between text-sm text-success-fg font-medium pt-1 border-t border-dashed border-border/40">
+                      <span>Points Discount</span>
+                      <span>-₹{o.discountAmount?.toFixed(2)}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+            <div className="mt-4 flex w-full justify-end border-t border-border/40 pt-4">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="rounded-xl border-primary/20 hover:bg-primary/5 hover:text-primary"
+                onClick={async () => {
+                  toast.loading("Adding items to cart...");
+                  try {
+                    for (const item of o.orderItems || []) {
+                      // Fetch full product details to ensure we have name and price
+                      const res = await api.get<Product>(`/products/${item.productId}`);
+                      add(res.data, item.quantity);
+                    }
+                    toast.dismiss();
+                    toast.success("All items added to cart!");
+                  } catch (e) {
+                    toast.dismiss();
+                    toast.error("Failed to add some items to cart.");
+                  }
+                }}
+              >
+                <ShoppingCart className="mr-2 h-4 w-4" /> Buy Again
+              </Button>
+            </div>
           </div>
         ))}
       </div>

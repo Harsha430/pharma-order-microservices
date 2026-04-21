@@ -1,4 +1,5 @@
 package com.pharmaorder.orderservice.model.entity;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -19,6 +20,7 @@ public class OrderItem {
 
     private Long productId;
     private Integer quantity;
+    @JsonProperty("price")
     private BigDecimal unitPrice;
 
     // Manual Builder

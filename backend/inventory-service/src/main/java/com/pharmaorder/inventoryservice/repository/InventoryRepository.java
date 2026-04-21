@@ -7,4 +7,5 @@ import java.util.UUID;
 
 public interface InventoryRepository extends JpaRepository<Inventory, Long> {
     Optional<Inventory> findByProductId(Long productId);
+    java.util.List<Inventory> findAllByProductIdIn(java.util.List<Long> productIds);
 }

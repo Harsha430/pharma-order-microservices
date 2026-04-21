@@ -8,6 +8,7 @@ import org.springframework.cache.annotation.EnableCaching;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableCaching
+@org.springframework.cloud.openfeign.EnableFeignClients
 public class ProductServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(ProductServiceApplication.class, args);

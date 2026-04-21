@@ -1,4 +1,5 @@
 package com.pharmaorder.orderservice.model.entity;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,11 +23,15 @@ public class Order {
     private UUID prescriptionId; // Nullable if not required
 
     private BigDecimal totalAmount;
+    private Integer pointsRedeemed;
+    private BigDecimal discountAmount;
     
     private String status; // PENDING, CONFIRMED, SHIPPED, DELIVERED, CANCELLED
     
+    @JsonProperty("createdAt")
     private LocalDateTime placedAt;
     
+    @JsonProperty("orderItems")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private List<OrderItem> items = new ArrayList<>();
 
@@ -60,4 +65,8 @@ public class Order {
     public void setPlacedAt(LocalDateTime at) { this.placedAt = at; }
     public List<OrderItem> getItems() { return items; }
     public void setItems(List<OrderItem> items) { this.items = items; }
+    public Integer getPointsRedeemed() { return pointsRedeemed; }
+    public void setPointsRedeemed(Integer p) { this.pointsRedeemed = p; }
+    public BigDecimal getDiscountAmount() { return discountAmount; }
+    public void setDiscountAmount(BigDecimal d) { this.discountAmount = d; }
 }

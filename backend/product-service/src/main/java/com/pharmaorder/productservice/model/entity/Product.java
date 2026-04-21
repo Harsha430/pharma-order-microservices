@@ -19,12 +19,16 @@ public class Product {
     private String description;
     
     private BigDecimal price;
+    private BigDecimal originalPrice; // For discounts/offers
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
     private boolean prescriptionRequired;
+    
+    private String dosage; // e.g. "500mg"
+    private String packaging; // e.g. "Strip of 10"
     
     private String status; // ACTIVE, INACTIVE, OUT_OF_STOCK
 
@@ -35,8 +39,11 @@ public class Product {
         public ProductBuilder name(String name) { p.name = name; return this; }
         public ProductBuilder description(String desc) { p.description = desc; return this; }
         public ProductBuilder price(BigDecimal price) { p.price = price; return this; }
+        public ProductBuilder originalPrice(BigDecimal op) { p.originalPrice = op; return this; }
         public ProductBuilder category(Category cat) { p.category = cat; return this; }
         public ProductBuilder prescriptionRequired(boolean pr) { p.prescriptionRequired = pr; return this; }
+        public ProductBuilder dosage(String dosage) { p.dosage = dosage; return this; }
+        public ProductBuilder packaging(String packaging) { p.packaging = packaging; return this; }
         public ProductBuilder status(String status) { p.status = status; return this; }
         public Product build() { return p; }
     }
@@ -50,10 +57,16 @@ public class Product {
     public void setDescription(String description) { this.description = description; }
     public BigDecimal getPrice() { return price; }
     public void setPrice(BigDecimal price) { this.price = price; }
+    public BigDecimal getOriginalPrice() { return originalPrice; }
+    public void setOriginalPrice(BigDecimal op) { this.originalPrice = op; }
     public Category getCategory() { return category; }
     public void setCategory(Category category) { this.category = category; }
     public boolean isPrescriptionRequired() { return prescriptionRequired; }
     public void setPrescriptionRequired(boolean pr) { this.prescriptionRequired = pr; }
+    public String getDosage() { return dosage; }
+    public void setDosage(String dosage) { this.dosage = dosage; }
+    public String getPackaging() { return packaging; }
+    public void setPackaging(String packaging) { this.packaging = packaging; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
 }
