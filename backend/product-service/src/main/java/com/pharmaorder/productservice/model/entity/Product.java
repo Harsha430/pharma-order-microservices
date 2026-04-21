@@ -31,6 +31,12 @@ public class Product {
     private String packaging; // e.g. "Strip of 10"
     
     private String status; // ACTIVE, INACTIVE, OUT_OF_STOCK
+    
+    private boolean isBundle;
+    private String bundleItems; // Comma-separated product IDs or names for simplicity
+    
+    private boolean onSeasonalOffer;
+    private BigDecimal seasonalDiscount;
 
     // Manual Builder
     public static ProductBuilder builder() { return new ProductBuilder(); }
@@ -45,6 +51,10 @@ public class Product {
         public ProductBuilder dosage(String dosage) { p.dosage = dosage; return this; }
         public ProductBuilder packaging(String packaging) { p.packaging = packaging; return this; }
         public ProductBuilder status(String status) { p.status = status; return this; }
+        public ProductBuilder isBundle(boolean ib) { p.isBundle = ib; return this; }
+        public ProductBuilder bundleItems(String bi) { p.bundleItems = bi; return this; }
+        public ProductBuilder onSeasonalOffer(boolean oso) { p.onSeasonalOffer = oso; return this; }
+        public ProductBuilder seasonalDiscount(BigDecimal sd) { p.seasonalDiscount = sd; return this; }
         public Product build() { return p; }
     }
 
@@ -69,4 +79,16 @@ public class Product {
     public void setPackaging(String packaging) { this.packaging = packaging; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+
+    public boolean isBundle() { return isBundle; }
+    public void setBundle(boolean bundle) { isBundle = bundle; }
+
+    public String getBundleItems() { return bundleItems; }
+    public void setBundleItems(String bundleItems) { this.bundleItems = bundleItems; }
+
+    public boolean isOnSeasonalOffer() { return onSeasonalOffer; }
+    public void setOnSeasonalOffer(boolean onSeasonalOffer) { this.onSeasonalOffer = onSeasonalOffer; }
+
+    public BigDecimal getSeasonalDiscount() { return seasonalDiscount; }
+    public void setSeasonalDiscount(BigDecimal seasonalDiscount) { this.seasonalDiscount = seasonalDiscount; }
 }

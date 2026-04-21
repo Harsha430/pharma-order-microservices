@@ -86,6 +86,7 @@ public class OrderController {
             event.put("totalAmount", savedOrder.getTotalAmount() != null ? savedOrder.getTotalAmount() : java.math.BigDecimal.ZERO);
             event.put("pointsRedeemed", savedOrder.getPointsRedeemed() != null ? savedOrder.getPointsRedeemed() : 0);
             event.put("status", savedOrder.getStatus());
+            event.put("prescriptionId", savedOrder.getPrescriptionId());
             
             // Include simplified items for the email template
             if (savedOrder.getItems() != null) {

@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as OrdersRouteImport } from './routes/orders'
+import { Route as OffersRouteImport } from './routes/offers'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as InventoryRouteImport } from './routes/inventory'
 import { Route as CatalogRouteImport } from './routes/catalog'
@@ -32,6 +33,11 @@ const ProfileRoute = ProfileRouteImport.update({
 const OrdersRoute = OrdersRouteImport.update({
   id: '/orders',
   path: '/orders',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OffersRoute = OffersRouteImport.update({
+  id: '/offers',
+  path: '/offers',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -71,6 +77,7 @@ export interface FileRoutesByFullPath {
   '/catalog': typeof CatalogRoute
   '/inventory': typeof InventoryRoute
   '/login': typeof LoginRoute
+  '/offers': typeof OffersRoute
   '/orders': typeof OrdersRoute
   '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
@@ -82,6 +89,7 @@ export interface FileRoutesByTo {
   '/catalog': typeof CatalogRoute
   '/inventory': typeof InventoryRoute
   '/login': typeof LoginRoute
+  '/offers': typeof OffersRoute
   '/orders': typeof OrdersRoute
   '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
@@ -94,6 +102,7 @@ export interface FileRoutesById {
   '/catalog': typeof CatalogRoute
   '/inventory': typeof InventoryRoute
   '/login': typeof LoginRoute
+  '/offers': typeof OffersRoute
   '/orders': typeof OrdersRoute
   '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
@@ -107,6 +116,7 @@ export interface FileRouteTypes {
     | '/catalog'
     | '/inventory'
     | '/login'
+    | '/offers'
     | '/orders'
     | '/profile'
     | '/register'
@@ -118,6 +128,7 @@ export interface FileRouteTypes {
     | '/catalog'
     | '/inventory'
     | '/login'
+    | '/offers'
     | '/orders'
     | '/profile'
     | '/register'
@@ -129,6 +140,7 @@ export interface FileRouteTypes {
     | '/catalog'
     | '/inventory'
     | '/login'
+    | '/offers'
     | '/orders'
     | '/profile'
     | '/register'
@@ -141,6 +153,7 @@ export interface RootRouteChildren {
   CatalogRoute: typeof CatalogRoute
   InventoryRoute: typeof InventoryRoute
   LoginRoute: typeof LoginRoute
+  OffersRoute: typeof OffersRoute
   OrdersRoute: typeof OrdersRoute
   ProfileRoute: typeof ProfileRoute
   RegisterRoute: typeof RegisterRoute
@@ -168,6 +181,13 @@ declare module '@tanstack/react-router' {
       path: '/orders'
       fullPath: '/orders'
       preLoaderRoute: typeof OrdersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/offers': {
+      id: '/offers'
+      path: '/offers'
+      fullPath: '/offers'
+      preLoaderRoute: typeof OffersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -221,6 +241,7 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogRoute: CatalogRoute,
   InventoryRoute: InventoryRoute,
   LoginRoute: LoginRoute,
+  OffersRoute: OffersRoute,
   OrdersRoute: OrdersRoute,
   ProfileRoute: ProfileRoute,
   RegisterRoute: RegisterRoute,

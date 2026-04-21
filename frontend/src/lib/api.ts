@@ -39,6 +39,8 @@ export type Product = {
   packaging?: string;
   quantity?: number;
   status?: string;
+  isBundle?: boolean;
+  bundleItems?: string;
   category?: { name: string };
 };
 export type AuthResponse = { id: string; token: string; email: string; roles: string[] };

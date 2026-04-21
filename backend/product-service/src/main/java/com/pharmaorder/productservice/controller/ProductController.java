@@ -70,6 +70,8 @@ public class ProductController {
                         .packaging(p.getPackaging())
                         .status(p.getStatus())
                         .quantity(inventoryMap.getOrDefault(p.getId(), 0))
+                        .isBundle(p.isBundle())
+                        .bundleItems(p.getBundleItems())
                         .build())
                 .collect(java.util.stream.Collectors.toList());
 
@@ -102,6 +104,8 @@ public class ProductController {
             .packaging(p.getPackaging())
             .status(p.getStatus())
             .quantity(qty)
+            .isBundle(p.isBundle())
+            .bundleItems(p.getBundleItems())
             .build();
 
         return ResponseEntity.ok(response);

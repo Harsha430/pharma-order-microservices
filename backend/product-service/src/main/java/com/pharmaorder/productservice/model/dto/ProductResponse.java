@@ -15,6 +15,8 @@ public class ProductResponse {
     private String packaging;
     private String status;
     private Integer quantity;
+    private boolean isBundle;
+    private String bundleItems;
 
     // Getters needed for Jackson serialisation
     public Long getId() { return id; }
@@ -28,6 +30,8 @@ public class ProductResponse {
     public String getPackaging() { return packaging; }
     public String getStatus() { return status; }
     public Integer getQuantity() { return quantity; }
+    public boolean isBundle() { return isBundle; }
+    public String getBundleItems() { return bundleItems; }
 
     // Manual builder (Lombok @Builder conflicts with hand-written one)
     public static ProductResponseBuilder builder() { return new ProductResponseBuilder(); }
@@ -44,6 +48,8 @@ public class ProductResponse {
         public ProductResponseBuilder packaging(String p) { r.packaging = p; return this; }
         public ProductResponseBuilder status(String s) { r.status = s; return this; }
         public ProductResponseBuilder quantity(Integer q) { r.quantity = q; return this; }
+        public ProductResponseBuilder isBundle(boolean b) { r.isBundle = b; return this; }
+        public ProductResponseBuilder bundleItems(String bi) { r.bundleItems = bi; return this; }
         public ProductResponse build() { return r; }
     }
 }

@@ -31,6 +31,7 @@ export function Header() {
   const links = [
     { to: "/", label: "Home" },
     { to: "/catalog", label: "Catalog" },
+    { to: "/offers", label: "Offers" },
     { to: "/inventory", label: "Stock" },
     { to: "/orders", label: "Orders" },
   ] as const;

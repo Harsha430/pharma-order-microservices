@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowLeft, ShoppingCart, FileText, Leaf, ShieldCheck, Truck } from "lucide-react";
+import { ArrowLeft, ShoppingCart, FileText, Leaf, ShieldCheck, Truck, CheckCircle2 } from "lucide-react";
 import { api, type Product } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/stores/cart";
@@ -55,8 +55,26 @@ function ProductDetail() {
             </span>
           )}
           <p className="mt-4 text-muted-foreground">{p.description ?? "Trusted, lab-tested formulation from PharmaOrder."}</p>
+          
+          {p.isBundle && p.bundleItems && (
+            <div className="mt-6 rounded-2xl bg-emerald-50 border border-emerald-100 p-5">
+              <p className="flex items-center gap-2 text-sm font-bold text-emerald-800 mb-3">
+                <ShieldCheck className="h-5 w-5" /> Package Includes:
+              </p>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {p.bundleItems.split(",").map(item => (
+                  <div key={item} className="flex items-center gap-2 text-sm text-emerald-700 bg-white/50 px-3 py-2 rounded-xl border border-emerald-100/50">
+                    <CheckCircle2 className="h-4 w-4 shrink-0" /> {item.trim()}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           <p className="mt-6 text-4xl font-bold">₹{p.price?.toFixed(2)}</p>
-          <p className="mt-1 text-sm text-muted-foreground">In Stock: {p.quantity ?? 0} units</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {p.isBundle ? "Combo Savings Available" : `In Stock: ${p.quantity ?? 0} units`}
+          </p>
           
           {(p.dosage || p.packaging) && (
             <div className="mt-5 flex flex-wrap gap-3">

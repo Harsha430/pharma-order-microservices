@@ -20,14 +20,16 @@ spring:
     username: guest
     password: guest
   mail:
-    host: mailhog
-    port: 1025
+    host: smtp.gmail.com
+    port: 587
+    username: abburimanohar1234@gmail.com
+    password: "cfpz velp jrdc fkum"
     properties:
       mail:
         smtp:
-          auth: false
+          auth: true
           starttls:
-            enable: false
+            enable: true
 
 eureka:
   client:

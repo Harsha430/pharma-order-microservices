@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ShieldCheck, Truck, HeartPulse, Sparkles, Leaf, Pill } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/ProductCard";
+import PromoBanner from "@/components/PromoBanner";
 import { api, type Product, type Category } from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";
 import heroImg from "@/assets/hero.jpg";
@@ -101,6 +102,11 @@ function HomePage() {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* PROMO BANNER */}
+      <section className="mx-auto max-w-7xl px-4 pt-16 md:px-8">
+        <PromoBanner />
       </section>
 
       {/* CATEGORIES */}
