@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed — VerdeRx</title>
+    <style>
+        body { margin: 0; padding: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .container { max-width: 600px; margin: 40px auto; background: #ffffff; border-radius: 24px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); }
+        .header { background: linear-gradient(135deg, #059669 0%, #10b981 100%); padding: 48px 40px; text-align: center; color: white; }
+        .logo { font-size: 28px; font-weight: 800; letter-spacing: -0.025em; margin-bottom: 24px; display: inline-flex; align-items: center; gap: 8px; }
+        .logo span { color: #d1fae5; }
+        .status-badge { display: inline-block; padding: 6px 16px; background: rgba(255, 255, 255, 0.2); border-radius: 99px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        .content { padding: 48px 40px; }
+        h1 { margin: 0 0 16px; font-size: 24px; font-weight: 700; color: #0f172a; }
+        p { margin: 0 0 32px; line-height: 1.6; color: #64748b; font-size: 16px; }
+        .order-id { font-family: monospace; background: #f1f5f9; padding: 4px 8px; border-radius: 6px; color: #475569; }
+        .summary-card { background: #f8fafc; border-radius: 16px; padding: 32px; margin-bottom: 32px; border: 1px solid #f1f5f9; }
+        .item-list { width: 100%; border-collapse: collapse; }
+        .item-list td { padding: 12px 0; border-bottom: 1px solid #e2e8f0; }
+        .item-list tr:last-child td { border-bottom: none; }
+        .item-name { font-weight: 600; color: #334155; }
+        .item-details { font-size: 14px; color: #94a3b8; }
+        .total-row { padding-top: 24px !important; border-top: 2px solid #e2e8f0 !important; }
+        .total-label { font-size: 18px; font-weight: 700; color: #0f172a; }
+        .total-value { font-size: 24px; font-weight: 800; color: #059669; text-align: right; }
+        .footer { background: #f1f5f9; padding: 32px 40px; text-align: center; font-size: 14px; color: #94a3b8; border-top: 1px solid #e2e8f0; }
+        .footer a { color: #059669; text-decoration: none; font-weight: 600; }
+        .button { display: inline-block; background: #059669; color: white !important; padding: 16px 32px; border-radius: 12px; font-weight: 700; text-decoration: none; margin-top: 8px; transition: background 0.2s; }
+        @media only screen and (max-width: 600px) {
+            .container { margin: 0; border-radius: 0; width: 100%; }
+            .header, .content, .footer { padding: 32px 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">Verde<span>Rx</span></div>
+            <br>
+            <div class="status-badge" th:text="${status}">PENDING</div>
+        </div>
+        <div class="content">
+            <h1>Order Confirmed!</h1>
+            <p>Hi there, we've received your order <span class="order-id" th:text="'#' + ${orderId}">#025fe28a</span>. Our team is preparing your medicine with care.</p>
+            
+            <div class="summary-card">
+                <table class="item-list">
+                    <tr th:each="item : ${items}">
+                        <td>
+                            <div class="item-name" th:text="'Product ID: ' + ${item.productId}">Medicine Name</div>
+                            <div class="item-details" th:text="${item.quantity} + ' x $' + ${item.unitPrice}">1 x $89.00</div>
+                        </td>
+                        <td align="right" class="item-name" th:text="'$' + ${#numbers.formatDecimal((item.quantity != null ? item.quantity : 0) * (item.unitPrice != null ? item.unitPrice : 0), 1, 2)}">$89.00</td>
+                    </tr>
+                    <tr>
+                        <td class="total-row total-label">Total Amount</td>
+                        <td class="total-row total-value" th:text="'$' + ${#numbers.formatDecimal(totalAmount, 1, 2)}">$89.00</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div style="text-align: center;">
+                <a href="http://localhost:5173/orders" class="button">View Order Status</a>
+            </div>
+        </div>
+        <div class="footer">
+            <p style="margin-bottom: 16px;">Wellness, delivered with care. Licensed pharmacy you can trust.</p>
+            <p>&copy; 2026 VerdeRx Inc. <br> <a href="#">Privacy Policy</a> &bull; <a href="#">Terms of Service</a></p>
+        </div>
+    </div>
+</body>
+</html>
