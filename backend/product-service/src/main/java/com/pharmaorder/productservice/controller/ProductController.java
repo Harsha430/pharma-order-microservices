@@ -78,6 +78,36 @@ public class ProductController {
         return ResponseEntity.ok(responses);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<java.util.List<com.pharmaorder.productservice.model.dto.ProductResponse>> searchProducts(
+            @org.springframework.web.bind.annotation.RequestParam("q") String query,
+            @org.springframework.web.bind.annotation.RequestParam(value = "size", defaultValue = "5") int size) {
+        
+        java.util.List<Product> products = productRepository.findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(query, query);
+        if (products.size() > size) {
+            products = products.subList(0, size);
+        }
+
+        java.util.List<com.pharmaorder.productservice.model.dto.ProductResponse> responses = products.stream()
+                .map(p -> com.pharmaorder.productservice.model.dto.ProductResponse.builder()
+                        .id(p.getId())
+                        .name(p.getName())
+                        .description(p.getDescription())
+                        .price(p.getPrice())
+                        .originalPrice(p.getOriginalPrice())
+                        .category(p.getCategory())
+                        .prescriptionRequired(p.isPrescriptionRequired())
+                        .dosage(p.getDosage())
+                        .packaging(p.getPackaging())
+                        .status(p.getStatus())
+                        .isBundle(p.isBundle())
+                        .bundleItems(p.getBundleItems())
+                        .build())
+                .collect(java.util.stream.Collectors.toList());
+
+        return ResponseEntity.ok(responses);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<com.pharmaorder.productservice.model.dto.ProductResponse> getProductById(@org.springframework.web.bind.annotation.PathVariable Long id) {
         java.util.Optional<Product> productOpt = productRepository.findById(id);

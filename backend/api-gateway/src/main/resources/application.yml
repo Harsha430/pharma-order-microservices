@@ -3,3 +3,13 @@ spring:
     name: api-gateway
   config:
     import: "optional:configserver:http://config-server:8888"
+  cloud:
+    gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          "[/**]":
+            allowedOriginPatterns: "http://localhost:*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            allowCredentials: true

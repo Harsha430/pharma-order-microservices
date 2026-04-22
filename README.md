@@ -35,6 +35,9 @@ A fully integrated, asynchronous points system that rewards consistent wellness.
 ### 📄 Secure Prescription S3 Management
 Object storage integration (MinIO/S3 compatible) for encrypted prescription uploads securely tied to patient orders.
 
+### 🤖 PharmaAssist AI (Smart Consultations)
+An integrated AI assistant powered by **Llama 3.3 (Groq)**. PharmaAssist can search the live product catalog, provide dosage recommendations for OTC medicines, check order status, and guide users through prescription management with natural language.
+
 ---
 
 ## 🏗️ System Architecture & Service Graph
@@ -52,6 +55,7 @@ graph TD
     classDef service fill:#6DB33F,stroke:#fff,stroke-width:2px,color:#fff;
     classDef db fill:#00758F,stroke:#fff,stroke-width:2px,color:#fff;
     classDef msg fill:#FF6600,stroke:#fff,stroke-width:2px,color:#fff;
+    classDef cloud fill:#9b59b6,stroke:#fff,stroke-width:2px,color:#fff;
 
     %% Client & Gateway Layer
     User((🧑‍⚕️ Client / Frontend)):::client
@@ -76,6 +80,7 @@ graph TD
         NotifSvc[📧 Notification Service :8086]:::service
         FileSvc[📁 File Service :8087]:::service
         LoyaltySvc[⭐ Loyalty Service :8088]:::service
+        ChatbotSvc[🤖 AI Chatbot :8089]:::service
     end
 
     %% Data Layer
@@ -86,6 +91,8 @@ graph TD
         Rabbit[(🐇 RabbitMQ Message Broker)]:::msg
         Redis[(⚡ Redis Cache)]:::db
         Minio[(🪣 MinIO Object Storage)]:::db
+        Postgres[(🐘 Chatbot Postgres)]:::db
+        Groq☁️((🌩️ Groq AI Cloud)):::cloud
     end
 
     %% Networking & Comm lines
@@ -104,8 +111,14 @@ graph TD
     %% Asynchronous Events (RabbitMQ)
     OrderSvc -- OrderCreatedEvent --> Rabbit
     UserSvc -- UserCreatedEvent --> Rabbit
-    Rabbit -- Listens --> NotifSvc
     Rabbit -- Listens --> LoyaltySvc
+    
+    %% AI Flows
+    User -- Interaction --> ChatbotSvc
+    ChatbotSvc -- Knowledge retrieval --> ProductSvc
+    ChatbotSvc -- Knowledge retrieval --> OrderSvc
+    ChatbotSvc -- Stream Tokens --> Groq☁️
+    ChatbotSvc --> Postgres
 ```
 
 ---
