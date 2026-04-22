@@ -58,41 +58,41 @@ graph TD
     classDef cloud fill:#9b59b6,stroke:#fff,stroke-width:2px,color:#fff;
 
     %% Client & Gateway Layer
-    User((🧑‍⚕️ Client / Frontend)):::client
-    API_GW[🌐 API Gateway :8080]:::gateway
+    User(( "🧑‍⚕️ Client / Frontend" )):::client
+    API_GW[ "🌐 API Gateway :8080" ]:::gateway
     
     User -- HTTPS --> API_GW
 
     %% Infrastructure Layer
     subgraph "Control Plane (Infrastructure)"
-        Eureka[🧭 Eureka Server :8761]:::infra
-        Config[⚙️ Config Server :8888]:::infra
-        Zipkin[🔍 Zipkin Tracing :9411]:::infra
+        Eureka[ "🧭 Eureka Server :8761" ]:::infra
+        Config[ "⚙️ Config Server :8888" ]:::infra
+        Zipkin[ "🔍 Zipkin Tracing :9411" ]:::infra
     end
 
     %% Core Business Services Layer
     subgraph "Domain Services (Spring Boot)"
-        UserSvc[👥 User Service :8081]:::service
-        ProductSvc[📦 Product Service :8082]:::service
-        InvSvc[📊 Inventory Service :8083]:::service
-        PrescSvc[📝 Prescription Service :8084]:::service
-        OrderSvc[🛒 Order Service :8085]:::service
-        NotifSvc[📧 Notification Service :8086]:::service
-        FileSvc[📁 File Service :8087]:::service
-        LoyaltySvc[⭐ Loyalty Service :8088]:::service
-        ChatbotSvc[🤖 AI Chatbot :8089]:::service
+        UserSvc[ "👥 User Service :8081" ]:::service
+        ProductSvc[ "📦 Product Service :8082" ]:::service
+        InvSvc[ "📊 Inventory Service :8083" ]:::service
+        PrescSvc[ "📝 Prescription Service :8084" ]:::service
+        OrderSvc[ "🛒 Order Service :8085" ]:::service
+        NotifSvc[ "📧 Notification Service :8086" ]:::service
+        FileSvc[ "📁 File Service :8087" ]:::service
+        LoyaltySvc[ "⭐ Loyalty Service :8088" ]:::service
+        ChatbotSvc[ "🤖 AI Chatbot :8089" ]:::service
     end
 
     %% Data Layer
     subgraph "Data Storage & Messaging"
-        MySQL1[(Auth & Users DB)]:::db
-        MySQL2[(Product Catalog DB)]:::db
-        MySQL3[(Order Ledger DB)]:::db
-        Rabbit[(🐇 RabbitMQ Message Broker)]:::msg
-        Redis[(⚡ Redis Cache)]:::db
-        Minio[(🪣 MinIO Object Storage)]:::db
-        Postgres[(🐘 Chatbot Postgres)]:::db
-        Groq☁️((🌩️ Groq AI Cloud)):::cloud
+        MySQL1[( "Auth & Users DB" )]:::db
+        MySQL2[( "Product Catalog DB" )]:::db
+        MySQL3[( "Order Ledger DB" )]:::db
+        Rabbit[( "🐇 RabbitMQ Message Broker" )]:::msg
+        Redis[( "⚡ Redis Cache" )]:::db
+        Minio[( "🪣 MinIO Object Storage" )]:::db
+        Postgres[( "🐘 Chatbot Postgres" )]:::db
+        GroqCloud(( "🌩️ Groq AI Cloud" )):::cloud
     end
 
     %% Networking & Comm lines
@@ -117,7 +117,7 @@ graph TD
     User -- Interaction --> ChatbotSvc
     ChatbotSvc -- Knowledge retrieval --> ProductSvc
     ChatbotSvc -- Knowledge retrieval --> OrderSvc
-    ChatbotSvc -- Stream Tokens --> Groq☁️
+    ChatbotSvc -- Stream Tokens --> GroqCloud
     ChatbotSvc --> Postgres
 ```
 
