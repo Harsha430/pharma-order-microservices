@@ -88,29 +88,44 @@ graph TD
         MySQL1["Auth & Users DB"]:::db
         MySQL2["Product Catalog DB"]:::db
         MySQL3["Order Ledger DB"]:::db
+        MySQL4["Inventory Stock DB"]:::db
+        MySQL5["Prescription Ledger DB"]:::db
+        MySQL6["Notification History DB"]:::db
+        MySQL7["Loyalty Points DB"]:::db
+        Postgres["🐘 Chatbot Postgres"]:::db
+        GroqCloud["🌩️ Groq AI Cloud"]:::cloud
         Rabbit["🐇 RabbitMQ Message Broker"]:::msg
         Redis["⚡ Redis Cache"]:::db
         Minio["🪣 MinIO Object Storage"]:::db
-        Postgres["🐘 Chatbot Postgres"]:::db
-        GroqCloud["🌩️ Groq AI Cloud"]:::cloud
     end
 
     %% Networking & Comm lines
     API_GW -. routes .-> UserSvc
     API_GW -. routes .-> ProductSvc
+    API_GW -. routes .-> InvSvc
+    API_GW -. routes .-> PrescSvc
     API_GW -. routes .-> OrderSvc
+    API_GW -. routes .-> NotifSvc
     API_GW -. routes .-> FileSvc
+    API_GW -. routes .-> LoyaltySvc
+    API_GW -. routes .-> ChatbotSvc
     
     %% DB Connections
     UserSvc --> MySQL1
     ProductSvc --> MySQL2
     ProductSvc -. Caches .-> Redis
+    InvSvc --> MySQL4
+    PrescSvc --> MySQL5
     OrderSvc --> MySQL3
+    NotifSvc --> MySQL6
+    LoyaltySvc --> MySQL7
     FileSvc --> Minio
+    ChatbotSvc --> Postgres
     
     %% Asynchronous Events (RabbitMQ)
     OrderSvc -- OrderCreatedEvent --> Rabbit
     UserSvc -- UserCreatedEvent --> Rabbit
+    Rabbit -- Listens --> NotifSvc
     Rabbit -- Listens --> LoyaltySvc
     
     %% AI Flows
@@ -118,7 +133,6 @@ graph TD
     ChatbotSvc -- Knowledge retrieval --> ProductSvc
     ChatbotSvc -- Knowledge retrieval --> OrderSvc
     ChatbotSvc -- Stream Tokens --> GroqCloud
-    ChatbotSvc --> Postgres
 ```
 
 ---
