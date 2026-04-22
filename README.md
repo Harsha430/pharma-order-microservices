@@ -58,8 +58,8 @@ graph TD
     classDef cloud fill:#9b59b6,stroke:#fff,stroke-width:2px,color:#fff;
 
     %% Client & Gateway Layer
-    User(( "🧑‍⚕️ Client / Frontend" )):::client
-    API_GW[ "🌐 API Gateway :8080" ]:::gateway
+    User([ "🧑‍⚕️ Client / Frontend" ]):::client
+    API_GW([ "🌐 API Gateway :8080" ]):::gateway
     
     User -- HTTPS --> API_GW
 
@@ -88,11 +88,11 @@ graph TD
         MySQL1[( "Auth & Users DB" )]:::db
         MySQL2[( "Product Catalog DB" )]:::db
         MySQL3[( "Order Ledger DB" )]:::db
-        Rabbit[( "🐇 RabbitMQ Message Broker" )]:::msg
-        Redis[( "⚡ Redis Cache" )]:::db
-        Minio[( "🪣 MinIO Object Storage" )]:::db
-        Postgres[( "🐘 Chatbot Postgres" )]:::db
-        GroqCloud(( "🌩️ Groq AI Cloud" )):::cloud
+        Rabbit([ "🐇 RabbitMQ Message Broker" ]):::msg
+        Redis([ "⚡ Redis Cache" ]):::db
+        Minio([ "🪣 MinIO Object Storage" ]):::db
+        Postgres([ "🐘 Chatbot Postgres" ]):::db
+        GroqCloud([ "🌩️ Groq AI Cloud" ]):::cloud
     end
 
     %% Networking & Comm lines
